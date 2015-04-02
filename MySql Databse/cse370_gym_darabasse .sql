@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 01, 2015 at 06:37 AM
+-- Generation Time: Mar 26, 2015 at 03:08 PM
 -- Server version: 5.6.21
 -- PHP Version: 5.6.3
 
@@ -46,34 +46,6 @@ CREATE TABLE IF NOT EXISTS `manager_info` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `membership_info`
---
-
-CREATE TABLE IF NOT EXISTS `membership_info` (
-  `mem_id` int(15) NOT NULL,
-  `mem_level` varchar(10) NOT NULL,
-  `mem_start_date` date NOT NULL,
-  `mem_end_date` date NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `promgrame_info`
---
-
-CREATE TABLE IF NOT EXISTS `promgrame_info` (
-  `prog_id` int(10) NOT NULL,
-  `intr_id` int(10) NOT NULL,
-  `type` varchar(10) NOT NULL,
-  `slot_info` time(6) NOT NULL,
-  `cost` bigint(20) NOT NULL,
-  `schedule-day` time(6) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `reg_info`
 --
 
@@ -109,17 +81,9 @@ CREATE TABLE IF NOT EXISTS `staff_info` (
   `s_name` varchar(255) NOT NULL,
   `s_bdate` date NOT NULL,
   `s_nid` int(15) NOT NULL,
-  `man_id` varchar(10) NOT NULL,
-  `instr_id` varchar(10) NOT NULL,
-  `start_date` date NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `staff_info`
---
-
-INSERT INTO `staff_info` (`s_Id`, `s_name`, `s_bdate`, `s_nid`, `man_id`, `instr_id`, `start_date`) VALUES
-(1, 'Imam Antu', '1992-10-04', 2147483647, '17520', '3564', '0000-00-00');
+  `man_id` int(10) NOT NULL,
+  `instr_id` int(10) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Indexes for dumped tables
@@ -150,7 +114,7 @@ MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 -- AUTO_INCREMENT for table `staff_info`
 --
 ALTER TABLE `staff_info`
-MODIFY `s_Id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+MODIFY `s_Id` int(10) NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
