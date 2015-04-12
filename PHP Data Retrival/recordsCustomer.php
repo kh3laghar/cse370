@@ -1,55 +1,31 @@
-//select db
-mysql_select_db('cse370');
-
-$sql ="SELECT * FROM customer";
-
-$recordsCustomer=mysql_query($sql);
-
-?>
-
-
-
-
-<html>
-<head>
-<title>Customer Data</title>
-</head>
-<body>
-<table width="700" border="1" cellpadding="2" cellspacing="1">
-<tr>
-<th>customer_id</th>
-<th>name</th>
-<th>age</th>
-<th>date_joined</th>
-<th>membership_id</th>
-<th>email</th>
-<th>phone</th>
-
-<tr>
-
 <?php
-
-while($customer=mysql_fetch_assoc($recordsCustomer)){
-
-
-echo"<tr>";
-
-printf( "<td>".$customer['customer_id']."</td>");
-
-echo "<td>".$customer['name']."</td>";
-
-echo "<td>".$customer['age']."</td>";
-
-echo "<td>".$customer['date_joined']."</td>";
-echo "<td>".$customer['membership_id']."</td>";
-echo "<td>".$customer['email']."</td>";
-echo "<td>".$customer['phone']."</td>";
-echo "</tr>";
+$dbhost = 'localhost';
+$dbuser = 'root';
+$dbpass = '';
+$conn = mysql_connect($dbhost, $dbuser, $dbpass);
+if(! $conn )
+{
+  die('Could not connect: ' . mysql_error());
 }
+$sql = 'SELECT customer_id,name,age, date_joined, email, phone, membership_id FROM customer';
+mysql_select_db('cse370');
+$retval = mysql_query( $sql, $conn );
+if(! $retval )
+{
+  die('Could not get data: ' . mysql_error());
+}
+while($row = mysql_fetch_array($retval, MYSQL_ASSOC))
+{
+    echo "EMP ID :{$row['customer_id']}  <br> ".
+         "EMP NAME : {$row['name']} <br> ".
+          "EMP AGE :{$row['age']}  <br> ".
+          "EMP Date Joined :{$row['date_joined']}  <br> ".
+          "EMP Email :{$row['email']}  <br> ".
+          "EMP Phone :{$row['phone']}  <br> ".
+          "Membership Id  :{$row['membership_id']}  <br> ".
+         
+         "--------------------------------<br>";
+} 
+echo "Fetched data successfully\n";
+mysql_close($conn);
 ?>
-</table>
-
-
-
-</body>
-</html>

@@ -1,49 +1,30 @@
 <?php
-
-//make connection
-mysql_connect('localhost','root','');
-//select db
-mysql_select_db('final project');
-$sql ="SELECT * FROM manager";
-
-$recordsManager=mysql_query($sql);
-
-?>
-
-
-
-
-<html>
-<head>
-<title>Customer Data</title>
-</head>
-<body>
-<table width="700" border="1" cellpadding="2" cellspacing="1">
-<tr>
-<th>cost</th>
-<th>date</th>
-<th>type</th>
-<th>manager_id</th>
-<th>staff_id</th>
-
-<tr>
-
-<?php
-
-while($manager=mysql_fetch_assoc($recordsManager)){
-
-
-echo"<tr>";
-
-
-echo "<td>".$manager['manager_id']."</td>";
-echo "<td>".$manager['staff_id']."</td>";
-echo "</tr>";
+$dbhost = 'localhost';
+$dbuser = 'root';
+$dbpass = '';
+$conn = mysql_connect($dbhost, $dbuser, $dbpass);
+if(! $conn )
+{
+  die('Could not connect: ' . mysql_error());
 }
+$sql = 'SELECT manager_id, Staff_id FROM manager';
+mysql_select_db('cse370');
+$retval = mysql_query( $sql, $conn );
+if(! $retval )
+{
+  die('Could not get data: ' . mysql_error());
+}
+while($row = mysql_fetch_array($retval, MYSQL_ASSOC))
+{
+    echo   "Manager Id  : {$row['manager_id']} <br> ".
+           "Staff_id : {$row['Staff_id']} <br> ".
+           
+           
+          
+          
+         
+         "--------------------------------<br>";
+} 
+echo "Fetched data successfully\n";
+mysql_close($conn);
 ?>
-</table>
-
-
-
-</body>
-</html>

@@ -1,48 +1,31 @@
 <?php
-
-//make connection
-mysql_connect('localhost','root','');
-//select db
-mysql_select_db('final project');
-$sql ="SELECT * FROM staff";
-
-$recordsStaff=mysql_query($sql);
-
-?>
-
-
-
-
-<html>
-<head>
-<title>Customer Data</title>
-</head>
-<body>
-<table width="700" border="1" cellpadding="2" cellspacing="1">
-<tr>
-<th>name</th>
-<th>staff_id</th>
-<th>manager_id</th>
-<th>instructor_id</th>
-
-<tr>
-
-<?php
-
-while($staff=mysql_fetch_assoc($recordsStaff)){
-
-
-echo"<tr>";
-echo "<td>".$staff['name']."</td>";
-echo "<td>".$staff['staff_id']."</td>";
-echo "<td>".$staff['manager_id']."</td>";
-echo "<td>".$staff['instructor_id']."</td>";
-echo "</tr>";
+$dbhost = 'localhost';
+$dbuser = 'root';
+$dbpass = '';
+$conn = mysql_connect($dbhost, $dbuser, $dbpass);
+if(! $conn )
+{
+  die('Could not connect: ' . mysql_error());
 }
+$sql = 'SELECT name, Staff_id, instructor_id,manager_id FROM staff';
+mysql_select_db('cse370');
+$retval = mysql_query( $sql, $conn );
+if(! $retval )
+{
+  die('Could not get data: ' . mysql_error());
+}
+while($row = mysql_fetch_array($retval, MYSQL_ASSOC))
+{
+    echo   "Name : {$row['name']} <br> ".
+           "Staff_id : {$row['Staff_id']} <br> ".
+           "instructor ID :{$row['instructor_id']}  <br> ".
+           "Manager Id  : {$row['manager_id']} <br> ".
+          
+          
+          
+         
+         "--------------------------------<br>";
+} 
+echo "Fetched data successfully\n";
+mysql_close($conn);
 ?>
-</table>
-
-
-
-</body>
-</html>
